@@ -69,16 +69,16 @@ local function install()
 	if (C.chat.enable == true) and (not IsAddOnLoaded("Prat") or not IsAddOnLoaded("Chatter")) then					
 		FCF_ResetChatWindows()
 		FCF_SetLocked(ChatFrame1, 1)
-		FCF_DockFrame(ChatFrame2)
-		FCF_SetLocked(ChatFrame2, 1)
-		FCF_OpenNewWindow(L.chat_general)
-		FCF_SetLocked(ChatFrame3, 1)
 		FCF_DockFrame(ChatFrame3)
-
-		FCF_OpenNewWindow(LOOT)
-		FCF_UnDockFrame(ChatFrame4)
+		FCF_SetLocked(ChatFrame3, 1)
+		FCF_OpenNewWindow(L.chat_general)
 		FCF_SetLocked(ChatFrame4, 1)
-		ChatFrame4:Show()
+		FCF_DockFrame(ChatFrame4)
+
+		FCF_OpenNewWindow(Log)
+		FCF_UnDockFrame(ChatFrame2)
+		FCF_SetLocked(ChatFrame2, 1)
+		ChatFrame2:Show()
 
 		for i = 1, NUM_CHAT_WINDOWS do
 			local frame = _G[format("ChatFrame%s", i)]
@@ -95,9 +95,9 @@ local function install()
 			if i == 1 then
 				frame:ClearAllPoints()
 				frame:Point("BOTTOMLEFT", TukuiInfoLeft, "TOPLEFT", 0, 6)
-			elseif i == 4 and chatName == LOOT then
+			elseif i == 2 then
 				frame:ClearAllPoints()
-				frame:Point("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", 0, 6)
+				frame:SetPoint("BOTTOM", Logbg, "BOTTOM", 0, 0)
 			end
 					
 			-- save new default position and dimension
@@ -107,16 +107,12 @@ local function install()
 			FCF_SetChatWindowFontSize(nil, frame, 12)
 			
 			-- rename windows general and combat log
-			if i == 1 then FCF_SetWindowName(frame, "G, S & W") end
 			if i == 2 then FCF_SetWindowName(frame, "Log") end
+			if i == 3 then FCF_SetWindowName(frame, "Guilde") end
+			if i == 4 then FCF_SetWindowName(frame, "Groupes") end
 		end
 		
 		ChatFrame_RemoveAllMessageGroups(ChatFrame1)
-		ChatFrame_RemoveChannel(ChatFrame1, L.chat_trade) -- erf, it seem we need to localize this now
-		ChatFrame_RemoveChannel(ChatFrame1, L.chat_general) -- erf, it seem we need to localize this now
-		ChatFrame_RemoveChannel(ChatFrame1, L.chat_defense) -- erf, it seem we need to localize this now
-		ChatFrame_RemoveChannel(ChatFrame1, L.chat_recrutment) -- erf, it seem we need to localize this now
-		ChatFrame_RemoveChannel(ChatFrame1, L.chat_lfg) -- erf, it seem we need to localize this now
 		ChatFrame_AddMessageGroup(ChatFrame1, "SAY")
 		ChatFrame_AddMessageGroup(ChatFrame1, "EMOTE")
 		ChatFrame_AddMessageGroup(ChatFrame1, "YELL")
@@ -148,22 +144,37 @@ local function install()
 		ChatFrame_AddMessageGroup(ChatFrame1, "ACHIEVEMENT")
 		ChatFrame_AddMessageGroup(ChatFrame1, "BN_WHISPER")
 		ChatFrame_AddMessageGroup(ChatFrame1, "BN_CONVERSATION")
+		ChatFrame_AddMessageGroup(ChatFrame4, "CHANNEL5")
+		ChatFrame_AddMessageGroup(ChatFrame4, "CHANNEL6")
 					
-		-- Setup the spam chat frame
+		-- Setup the Guild chat frame
 		ChatFrame_RemoveAllMessageGroups(ChatFrame3)
-		ChatFrame_AddChannel(ChatFrame3, L.chat_trade) -- erf, it seem we need to localize this now
-		ChatFrame_AddChannel(ChatFrame3, L.chat_general) -- erf, it seem we need to localize this now
-		ChatFrame_AddChannel(ChatFrame3, L.chat_defense) -- erf, it seem we need to localize this now
-		ChatFrame_AddChannel(ChatFrame3, L.chat_recrutment) -- erf, it seem we need to localize this now
-		ChatFrame_AddChannel(ChatFrame3, L.chat_lfg) -- erf, it seem we need to localize this now
+		ChatFrame_AddChannel(ChatFrame3, "GUILD") -- erf, it seem we need to localize this now
+		ChatFrame_AddChannel(ChatFrame3, "OFFICER") -- erf, it seem we need to localize this now
+		ChatFrame_AddChannel(ChatFrame3, "GUILD_ACHIEVEMENT") -- erf, it seem we need to localize this now
+		ChatFrame_AddChannel(ChatFrame3, "WHISPER") -- erf, it seem we need to localize this now
+		ChatFrame_AddChannel(ChatFrame3, "GUILD_ACHIEVEMENT") -- erf, it seem we need to localize this now
+		ChatFrame_AddMessageGroup(ChatFrame4, "CHANNEL5")
+		ChatFrame_AddMessageGroup(ChatFrame4, "CHANNEL6")
 				
-		-- Setup the right chat
+		-- Setup the Group chat
 		ChatFrame_RemoveAllMessageGroups(ChatFrame4)
-		ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_XP_GAIN")
-		ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_HONOR_GAIN")
-		ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_FACTION_CHANGE")
-		ChatFrame_AddMessageGroup(ChatFrame4, "LOOT")
-		ChatFrame_AddMessageGroup(ChatFrame4, "MONEY")
+		ChatFrame_AddMessageGroup(ChatFrame4, "PARTY")
+		ChatFrame_AddMessageGroup(ChatFrame4, "PARTY_LEADER")
+		ChatFrame_AddMessageGroup(ChatFrame4, "RAID")
+		ChatFrame_AddMessageGroup(ChatFrame4, "RAID_LEADER")
+		ChatFrame_AddMessageGroup(ChatFrame4, "RAID_WARNING")
+		ChatFrame_AddMessageGroup(ChatFrame4, "BATTLEGROUND")
+		ChatFrame_AddMessageGroup(ChatFrame4, "BATTLEGROUND_LEADER")
+		ChatFrame_AddMessageGroup(ChatFrame4, "BG_HORDE")
+		ChatFrame_AddMessageGroup(ChatFrame4, "BG_ALLIANCE")
+		ChatFrame_AddMessageGroup(ChatFrame4, "BG_NEUTRAL")
+		ChatFrame_AddMessageGroup(ChatFrame4, "BN_WHISPER")
+		ChatFrame_AddMessageGroup(ChatFrame4, "BN_CONVERSATION")
+		ChatFrame_AddMessageGroup(ChatFrame4, "WHISPER")
+		ChatFrame_AddMessageGroup(ChatFrame4, "CHANNEL5")
+		ChatFrame_AddMessageGroup(ChatFrame4, "CHANNEL6")
+
 				
 		-- enable classcolor automatically on login and on each character without doing /configure each time.
 		ToggleChatColorNamesByClassGroup(true, "SAY")
@@ -186,6 +197,7 @@ local function install()
 		ToggleChatColorNamesByClassGroup(true, "CHANNEL3")
 		ToggleChatColorNamesByClassGroup(true, "CHANNEL4")
 		ToggleChatColorNamesByClassGroup(true, "CHANNEL5")
+		ToggleChatColorNamesByClassGroup(true, "CHANNEL6")
 	end
 	
 	-- reset saved variables on char

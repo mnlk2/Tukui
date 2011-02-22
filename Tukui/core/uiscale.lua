@@ -45,7 +45,7 @@ T.UIScale = function()
 	if T.lowversion then
 		T.raidscale = 0.8
 	else
-		T.raidscale = 1
+		T.raidscale = 0.8
 	end
 end
 T.UIScale()

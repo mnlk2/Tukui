@@ -34,6 +34,7 @@
 	<Script file="core\launch.lua"/>
 	<Script file="core\disable.lua"/>
 	<Script file="core\clientfonts.lua"/>
+  <Script file="core\animation.lua"/>
 	<Script file="modules\blizzard\watchframe.lua"/>
 	<Script file="modules\blizzard\durability.lua"/>
 	<Script file="modules\blizzard\vehicle.lua"/>
@@ -57,7 +58,7 @@
 	<Script file="modules\buffs\buffs.lua"/>
 	<Script file="modules\maps\minimap.lua"/>
 	<Script file="modules\panels\panels.lua"/>
-	<Script file="modules\datatext\armor.lua"/>
+ 	<Script file="modules\datatext\armor.lua"/>
 	<Script file="modules\datatext\avoidance.lua"/>
 	<Script file="modules\datatext\bags.lua"/>
 	<Script file="modules\datatext\battleground.lua"/>
@@ -99,6 +100,7 @@
 	<Script file="modules\chat\copychat.lua"/>
 	<Script file="modules\chat\mousescroll.lua"/>
 	<Script file="modules\chat\sounds.lua"/>
+	<Script file="modules\chat\chatanimations.lua"/>
 	<Script file="modules\tooltip\tooltip.lua"/>
 	<Script file="modules\nameplates\nameplates.lua"/>
 	<Script file="modules\bags\bags.lua"/>
@@ -118,5 +120,6 @@
 	<Script file="modules\misc\threatbar.lua"/>
 	<Script file="modules\blizzard\achievements.lua"/>
 	<Script file="core\movers.lua"/>
+	<Script file="modules\blizzard\raidUtility.lua"/>
 	<Script file="developer\test.lua"/>
 </Ui>

@@ -18,8 +18,14 @@ for i= 1, 12 do
 	b:SetFrameLevel(15)
 	
 	if i == 1 then
-		b:SetPoint("TOPRIGHT", bar, -T.buttonspacing, -T.buttonspacing)
+		b:SetPoint("TOPLEFT", bar, T.buttonspacing, -T.buttonspacing)
 	else
-		b:SetPoint("TOP", b2, "BOTTOM", 0, -T.buttonspacing)
+		b:SetPoint("LEFT", b2, "RIGHT", T.buttonspacing, 0)
 	end
+end
+if not T.lowversion then
+	MultiBarRightButton11:SetAlpha(0)
+	MultiBarRightButton11:SetScale(0.0001)
+	MultiBarRightButton12:SetAlpha(0)
+	MultiBarRightButton12:SetScale(0.0001)
 end

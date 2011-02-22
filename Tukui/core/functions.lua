@@ -394,10 +394,10 @@ T.PostUpdateHealth = function(health, unit, min, max)
 			r, g, b = oUF.ColorGradient(min/max, 0.69, 0.31, 0.31, 0.65, 0.63, 0.35, 0.33, 0.59, 0.33)
 			if unit == "player" and health:GetAttribute("normalUnit") ~= "pet" then
 				if C["unitframes"].showtotalhpmp == true then
-					health.value:SetFormattedText("|cff559655%s|r |cffD7BEA5|||r |cff559655%s|r", ShortValue(min), ShortValue(max))
-				else
-					health.value:SetFormattedText("|cffAF5050%d|r |cffD7BEA5-|r |cff%02x%02x%02x%d%%|r", min, r * 255, g * 255, b * 255, floor(min / max * 100))
-				end
+	        health.value:SetFormattedText("|cff559655%s|r |cffD7BEA5|||r |cff559655%s|r", ShortValue(min), ShortValue(max))
+        else
+	        health.value:SetFormattedText("|cffAF5050%d|r |cffD7BEA5-|r |cff%02x%02x%02x%d%%|r", min, r * 255, g * 255, b * 255, floor(min / max * 100))
+        end
 			elseif unit == "target" or (unit and unit:find("boss%d")) then
 				if C["unitframes"].showtotalhpmp == true then
 					health.value:SetFormattedText("|cff559655%s|r |cffD7BEA5|||r |cff559655%s|r", ShortValue(min), ShortValue(max))
@@ -463,10 +463,10 @@ end
 T.PostNamePosition = function(self)
 	self.Name:ClearAllPoints()
 	if (self.Power.value:GetText() and UnitIsEnemy("player", "target") and C["unitframes"].targetpowerpvponly == true) or (self.Power.value:GetText() and C["unitframes"].targetpowerpvponly == false) then
-		self.Name:SetPoint("CENTER", self.panel, "CENTER", 0, 0)
+		self.Name:SetPoint("CENTER", self.Health, "CENTER", 0, 0)
 	else
 		self.Power.value:SetAlpha(0)
-		self.Name:SetPoint("LEFT", self.panel, "LEFT", 4, 0)
+		self.Name:SetPoint("RIGHT", self.Health, "RIGHT", -4, 0)
 	end
 end
 
@@ -497,23 +497,23 @@ T.PostUpdatePower = function(power, unit, min, max)
 			if pType == 0 then
 				if unit == "target" then
 					if C["unitframes"].showtotalhpmp == true then
-						power.value:SetFormattedText("%s |cffD7BEA5|||r %s", ShortValue(max - (max - min)), ShortValue(max))
+						power.value:SetFormattedText("%d%% |cffD7BEA5-|r %s", floor(min / max * 100), ShortValue(max - (max - min)))
 					else
 						power.value:SetFormattedText("%d%% |cffD7BEA5-|r %s", floor(min / max * 100), ShortValue(max - (max - min)))
 					end
 				elseif unit == "player" and self:GetAttribute("normalUnit") == "pet" or unit == "pet" then
 					if C["unitframes"].showtotalhpmp == true then
-						power.value:SetFormattedText("%s |cffD7BEA5|||r %s", ShortValue(max - (max - min)), ShortValue(max))
+						power.value:SetFormattedText("%d%% |cffD7BEA5-|r %s", floor(min / max * 100), ShortValue(max - (max - min)))
 					else
-						power.value:SetFormattedText("%d%%", floor(min / max * 100))
+						power.value:SetFormattedText("%d%% |cffD7BEA5-|r %s", floor(min / max * 100), ShortValue(max - (max - min)))
 					end
 				elseif (unit and unit:find("arena%d")) or unit == "focus" or unit == "focustarget" then
 					power.value:SetText(ShortValue(min))
 				else
 					if C["unitframes"].showtotalhpmp == true then
-						power.value:SetFormattedText("%s |cffD7BEA5|||r %s", ShortValue(max - (max - min)), ShortValue(max))
+						power.value:SetFormattedText("%d%% |cffD7BEA5-|r %s", floor(min / max * 100), ShortValue(max - (max - min)))
 					else
-						power.value:SetFormattedText("%d%% |cffD7BEA5-|r %d", floor(min / max * 100), max - (max - min))
+						power.value:SetFormattedText("%d%% |cffD7BEA5-|r %s", floor(min / max * 100), ShortValue(max - (max - min)))
 					end
 				end
 			else
@@ -963,77 +963,89 @@ if C["unitframes"].raidunitdebuffwatch == true then
 		
 		ORD.ShowDispelableDebuff = true
 		ORD.FilterDispellableDebuff = true
-		ORD.MatchBySpellName = false
+		ORD.MatchBySpellName = true
+		
+		local function SpellName(id)
+			local name, _, _, _, _, _, _, _, _ = GetSpellInfo(id) 	
+			return name	
+		end
 
 		T.debuffids = {
-			-- Other debuff
-			67479, -- Impale
-			
-			--CATA DEBUFFS
+		-- Other debuff
+			SpellName(67479), -- Impale
+
+		--CATA DEBUFFS
 		--Baradin Hold
-			95173, -- Consuming Darkness
-			
+			SpellName(95173), -- Consuming Darkness
+
 		--Blackwing Descent
 			--Magmaw
-			91911, -- Constricting Chains
-			94679, -- Parasitic Infection
-			94617, -- Mangle
-			
+			SpellName(91911), -- Constricting Chains
+			SpellName(94679), -- Parasitic Infection
+			SpellName(94617), -- Mangle
+
 			--Omintron Defense System
-			79835, --Poison Soaked Shell	
-			91433, --Lightning Conductor
-			91521, --Incineration Security Measure
-			
+			SpellName(79835), --Poison Soaked Shell
+			SpellName(91433), --Lightning Conductor
+			SpellName(91521), --Incineration Security Measure
+
 			--Maloriak
-			77699, -- Flash Freeze
-			77760, -- Biting Chill
-			
+			SpellName(77699), -- Flash Freeze
+			SpellName(77760), -- Biting Chill
+
 			--Atramedes
-			92423, -- Searing Flame
-			92485, -- Roaring Flame
-			92407, -- Sonic Breath
-			
+			SpellName(92423), -- Searing Flame
+			SpellName(92485), -- Roaring Flame
+			SpellName(92407), -- Sonic Breath
+
 			--Chimaeron
-			82881, -- Break
-			89084, -- Low Health
-			
+			SpellName(82881), -- Break
+			SpellName(89084), -- Low Health
+
 			--Nefarian
-			
+
+			--Sinestra
+			SpellName(92956), --Wrack
+
 		--The Bastion of Twilight
 			--Valiona & Theralion
-			92878, -- Blackout
-			86840, -- Devouring Flames
-			95639, -- Engulfing Magic
-			
+			SpellName(92878), -- Blackout
+			SpellName(86840), -- Devouring Flames
+			SpellName(95639), -- Engulfing Magic
+
 			--Halfus Wyrmbreaker
-			39171, -- Malevolent Strikes
-			
+			SpellName(39171), -- Malevolent Strikes
+
 			--Twilight Ascendant Council
-			92511, -- Hydro Lance
-			82762, -- Waterlogged
-			92505, -- Frozen
-			92518, -- Flame Torrent
-			83099, -- Lightning Rod
-			92075, -- Gravity Core
-			92488, -- Gravity Crush
-			
+			SpellName(92511), -- Hydro Lance
+			SpellName(82762), -- Waterlogged
+			SpellName(92505), -- Frozen
+			SpellName(92518), -- Flame Torrent
+			SpellName(83099), -- Lightning Rod
+			SpellName(92075), -- Gravity Core
+			SpellName(92488), -- Gravity Crush
+
 			--Cho'gall
-			86028, -- Cho's Blast
-			86029, -- Gall's Blast
-			
+			SpellName(86028), -- Cho's Blast
+			SpellName(86029), -- Gall's Blast
+
 		--Throne of the Four Winds
 			--Conclave of Wind
 				--Nezir <Lord of the North Wind>
-				93131, --Ice Patch
+				SpellName(93131), --Ice Patch
 				--Anshal <Lord of the West Wind>
-				86206, --Soothing Breeze
-				93122, --Toxic Spores
+				SpellName(86206), --Soothing Breeze
+				SpellName(93122), --Toxic Spores
 				--Rohash <Lord of the East Wind>
-				93058, --Slicing Gale 
+				SpellName(93058), --Slicing Gale
 			--Al'Akir
-			93260, -- Ice Storm
-			93295, -- Lightning Rod
+			SpellName(93260), -- Ice Storm
+			SpellName(93295), -- Lightning Rod
 		}
+
+		T.ReverseTimer = {
+			[92956] = true, -- Sinestra (Wrack)
+		},
 		
 		ORD:RegisterDebuffs(T.debuffids)
 	end

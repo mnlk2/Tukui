@@ -5,8 +5,10 @@ if not C["actionbar"].enable == true then return end
 -- setup MultiBarLeft as bar #3 
 ---------------------------------------------------------------------------
 
-local bar = TukuiBar3
-MultiBarBottomRight:SetParent(bar)
+local barL = TukuiBar3Left
+local barR = TukuiBar3Right
+barR:SetParent(barL)
+MultiBarBottomRight:SetParent(barL)
 
 for i= 1, 12 do
 	local b = _G["MultiBarBottomRightButton"..i]
@@ -16,17 +18,22 @@ for i= 1, 12 do
 	b:SetFrameStrata("BACKGROUND")
 	b:SetFrameLevel(15)
 	
-	if i == 1 then
-		b:SetPoint("BOTTOMLEFT", bar, T.buttonspacing, T.buttonspacing)
-	elseif i == 7 then
-		b:SetPoint("TOPLEFT", bar, T.buttonspacing, -T.buttonspacing)
-	else
-		b:SetPoint("LEFT", b2, "RIGHT", T.buttonspacing, 0)
-	end
+		if i == 1 then
+			b:SetPoint("TOPLEFT", barL, "TOPLEFT", T.buttonspacing, -T.buttonspacing)
+		elseif i == 3 then
+			b:SetPoint("TOP", _G["MultiBarBottomRightButton"..i-2], "BOTTOM", 0, -T.buttonspacing)
+		elseif i == 5 then
+			b:SetPoint("TOP", _G["MultiBarBottomRightButton"..i-2], "BOTTOM", 0, -T.buttonspacing)
+		elseif i == 7 then
+			b:SetPoint("TOPLEFT", barR, "TOPLEFT", T.buttonspacing, -T.buttonspacing)
+		elseif i == 9 then
+			b:SetPoint("TOP", _G["MultiBarBottomRightButton"..i-2], "BOTTOM", 0, -T.buttonspacing)
+		elseif i == 11 then
+			b:SetPoint("TOP", _G["MultiBarBottomRightButton"..i-2], "BOTTOM", 0, -T.buttonspacing)
+		else
+			b:SetPoint("LEFT", b2, "RIGHT", T.buttonspacing, 0)
+		end 		
 end
 
-for i=7, 12 do
-	local b = _G["MultiBarBottomRightButton"..i]
-	local b2 = _G["MultiBarBottomRightButton1"]
-	b:SetFrameLevel(b2:GetFrameLevel() - 2)
-end
+
+

@@ -55,7 +55,7 @@ bar:SetScript("OnEvent", function(self, event, ...)
 
 		self:Execute([[
 			buttons = table.new()
-			for i = 1, 12 do
+			for i = 1, 10 do
 				table.insert(buttons, self:GetFrameRef("ActionButton"..i))
 			end
 		]])
@@ -70,7 +70,7 @@ bar:SetScript("OnEvent", function(self, event, ...)
 	elseif event == "PLAYER_ENTERING_WORLD" then
 		MainMenuBar_UpdateKeyRing()
 		local button
-		for i = 1, 12 do
+		for i = 1, 10 do
 			button = _G["ActionButton"..i]
 			button:SetSize(T.buttonsize, T.buttonsize)
 			button:ClearAllPoints()

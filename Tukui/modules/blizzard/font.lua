@@ -39,8 +39,8 @@ TukuiFonts:SetScript("OnEvent", function(self, event, addon)
 		COMBAT = INVISIBLE
 	end
 
-	UIDROPDOWNMENU_DEFAULT_TEXT_HEIGHT = 12
-	CHAT_FONT_HEIGHTS = {12, 13, 14, 15, 16, 17, 18, 19, 20}
+	UIDROPDOWNMENU_DEFAULT_TEXT_HEIGHT = 10
+	CHAT_FONT_HEIGHTS = {8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
 
 	UNIT_NAME_FONT     = NORMAL
 	NAMEPLATE_FONT     = NORMAL
@@ -48,35 +48,35 @@ TukuiFonts:SetScript("OnEvent", function(self, event, addon)
 	STANDARD_TEXT_FONT = NORMAL
 
 	-- Base fonts
-	SetFont(GameTooltipHeader,                  NORMAL, 12)
-	SetFont(NumberFont_OutlineThick_Mono_Small, NUMBER, 12, "OUTLINE")
-	SetFont(NumberFont_Outline_Huge,            NUMBER, 28, "THICKOUTLINE", 28)
-	SetFont(NumberFont_Outline_Large,           NUMBER, 15, "OUTLINE")
-	SetFont(NumberFont_Outline_Med,             NUMBER, 13, "OUTLINE")
-	SetFont(NumberFont_Shadow_Med,              NORMAL, 12)
-	SetFont(NumberFont_Shadow_Small,            NORMAL, 12)
-	SetFont(QuestFont,                          NORMAL, 14)
-	SetFont(QuestFont_Large,                    NORMAL, 14)
-	SetFont(SystemFont_Large,                   NORMAL, 15)
-	SetFont(SystemFont_Med1,                    NORMAL, 12)
-	SetFont(SystemFont_Med3,                    NORMAL, 13)
-	SetFont(SystemFont_OutlineThick_Huge2,      NORMAL, 20, "THICKOUTLINE")
-	SetFont(SystemFont_Outline_Small,           NUMBER, 12, "OUTLINE")
-	SetFont(SystemFont_Shadow_Large,            NORMAL, 15)
-	SetFont(SystemFont_Shadow_Med1,             NORMAL, 12)
-	SetFont(SystemFont_Shadow_Med3,             NORMAL, 13)
-	SetFont(SystemFont_Shadow_Outline_Huge2,    NORMAL, 20, "OUTLINE")
-	SetFont(SystemFont_Shadow_Small,            NORMAL, 11)
-	SetFont(SystemFont_Small,                   NORMAL, 12)
-	SetFont(SystemFont_Tiny,                    NORMAL, 12)
-	SetFont(Tooltip_Med,                        NORMAL, 12)
-	SetFont(Tooltip_Small,                      NORMAL, 12)
+	SetFont(GameTooltipHeader,                  NORMAL, 10)
+	SetFont(NumberFont_OutlineThick_Mono_Small, NUMBER, 10, "OUTLINE")
+	SetFont(NumberFont_Outline_Huge,            NUMBER, 26, "THICKOUTLINE", 28)
+	SetFont(NumberFont_Outline_Large,           NUMBER, 13, "OUTLINE")
+	SetFont(NumberFont_Outline_Med,             NUMBER, 11, "OUTLINE")
+	SetFont(NumberFont_Shadow_Med,              NORMAL, 10)
+	SetFont(NumberFont_Shadow_Small,            NORMAL, 10)
+	SetFont(QuestFont,                          NORMAL, 12)
+	SetFont(QuestFont_Large,                    NORMAL, 12)
+	SetFont(SystemFont_Large,                   NORMAL, 13)
+	SetFont(SystemFont_Med1,                    NORMAL, 10)
+	SetFont(SystemFont_Med3,                    NORMAL, 11)
+	SetFont(SystemFont_OutlineThick_Huge2,      NORMAL, 18, "THICKOUTLINE")
+	SetFont(SystemFont_Outline_Small,           NUMBER, 10, "OUTLINE")
+	SetFont(SystemFont_Shadow_Large,            NORMAL, 13)
+	SetFont(SystemFont_Shadow_Med1,             NORMAL, 10)
+	SetFont(SystemFont_Shadow_Med3,             NORMAL, 11)
+	SetFont(SystemFont_Shadow_Outline_Huge2,    NORMAL, 18, "OUTLINE")
+	SetFont(SystemFont_Shadow_Small,            NORMAL, 9)
+	SetFont(SystemFont_Small,                   NORMAL, 10)
+	SetFont(SystemFont_Tiny,                    NORMAL, 10)
+	SetFont(Tooltip_Med,                        NORMAL, 10)
+	SetFont(Tooltip_Small,                      NORMAL, 10)
 	SetFont(CombatTextFont,                     COMBAT, 100, "OUTLINE") -- number here just increase the font quality.
-	SetFont(SystemFont_Shadow_Huge1,            NORMAL, 20, "THINOUTLINE")
-	SetFont(ZoneTextString,                     NORMAL, 32, "OUTLINE")
-	SetFont(SubZoneTextString,                  NORMAL, 25, "OUTLINE")
-	SetFont(PVPInfoTextString,                  NORMAL, 22, "THINOUTLINE")
-	SetFont(PVPArenaTextString,                 NORMAL, 22, "THINOUTLINE")
+	SetFont(SystemFont_Shadow_Huge1,            NORMAL, 18, "THINOUTLINE")
+	SetFont(ZoneTextString,                     NORMAL, 30, "OUTLINE")
+	SetFont(SubZoneTextString,                  NORMAL, 23, "OUTLINE")
+	SetFont(PVPInfoTextString,                  NORMAL, 20, "THINOUTLINE")
+	SetFont(PVPArenaTextString,                 NORMAL, 20, "THINOUTLINE")
 
 	hooksecurefunc("PlayerTitleFrame_UpdateTitles", FixTitleFont)
 	FixTitleFont()

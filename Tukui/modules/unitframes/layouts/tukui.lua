@@ -69,7 +69,7 @@ local function Shared(self, unit)
 	------------------------------------------------------------------------
 	
 	if (unit == "player" or unit == "target") then
-		-- create a panel
+    -- create a panel 
 		local panel = CreateFrame("Frame", nil, self)
 		if T.lowversion then
 			panel:CreatePanel("Default", 186, 21, "BOTTOM", self, "BOTTOM", 0, 0)
@@ -166,26 +166,26 @@ local function Shared(self, unit)
 			else
 				portrait:SetHeight(57)
 			end
-			portrait:SetWidth(33)
+			portrait:SetWidth(57)
 			portrait:SetAlpha(1)
 			if unit == "player" then
-				health:SetPoint("TOPLEFT", 34,0)
+				health:SetPoint("TOPLEFT", 57,0)
 				health:SetPoint("TOPRIGHT")
 				power:Point("TOPLEFT", health, "BOTTOMLEFT", 0, -1)
 				power:Point("TOPRIGHT", health, "BOTTOMRIGHT", 0, -1)
 				panel:Point("TOPLEFT", power, "BOTTOMLEFT", 0, -1)
 				panel:Point("TOPRIGHT", power, "BOTTOMRIGHT", 0, -1)
-				portrait:SetPoint("TOPLEFT", health, "TOPLEFT", -34,0)
+				portrait:SetPoint("TOPLEFT", health, "TOPLEFT", -57,0)
 			elseif unit == "target" then
-				health:SetPoint("TOPRIGHT", -34,0)
+				health:SetPoint("TOPRIGHT", -57,0)
 				health:SetPoint("TOPLEFT")
 				power:Point("TOPRIGHT", health, "BOTTOMRIGHT", 0, -1)
 				power:Point("TOPLEFT", health, "BOTTOMLEFT", 0, -1)
 				panel:Point("TOPRIGHT", power, "BOTTOMRIGHT", 0, -1)
 				panel:Point("TOPLEFT", power, "BOTTOMLEFT", 0, -1)
-				portrait:SetPoint("TOPRIGHT", health, "TOPRIGHT", 34,0)
+				portrait:SetPoint("TOPRIGHT", health, "TOPRIGHT", 57,0)
 			end
-			panel:SetWidth(panel:GetWidth() - 34) -- panel need to be resized if charportrait is enabled
+			panel:SetWidth(panel:GetWidth() - 57) -- panel need to be resized if charportrait is enabled
 			table.insert(self.__elements, T.HidePortrait)
 			self.Portrait = portrait
 		end
@@ -230,6 +230,14 @@ local function Shared(self, unit)
 		--]]
 			
 		if (unit == "player") then
+      --name
+      local Name = health:CreateFontString(nil, "OVERLAY")
+      self:Tag(Name, '[Tukui:getcustomclasscolor][Tukui:namelong] |cffffffff[level]  [shortclassification]')
+      Name:SetPoint("LEFT", health, "LEFT", TukuiDB.Scale(4), TukuiDB.Scale(1))
+      Name:SetJustifyH("LEFT")
+      Name:SetFont(font1, 16)
+      self.Name = Name		
+      
 			-- combat icon
 			local Combat = health:CreateTexture(nil, "OVERLAY")
 			Combat:Height(19)
@@ -545,13 +553,12 @@ local function Shared(self, unit)
 		
 		if (unit == "target") then			
 			-- Unit name on target
-			local Name = health:CreateFontString(nil, "OVERLAY")
-			Name:Point("LEFT", panel, "LEFT", 4, 0)
-			Name:SetJustifyH("LEFT")
-			Name:SetFont(font1, 12)
-
-			self:Tag(Name, '[Tukui:getnamecolor][Tukui:namelong] [Tukui:diffcolor][level] [shortclassification]')
-			self.Name = Name
+      local Name = health:CreateFontString(nil, "OVERLAY")
+      self:Tag(Name, '[Tukui:getcustomclasscolor][Tukui:namelong] |cffffffff[level] [shortclassification]')
+      Name:SetPoint("RIGHT", health, "RIGHT", TukuiDB.Scale(4), TukuiDB.Scale(1))
+      Name:SetJustifyH("RIGHT")
+      Name:SetFont(font1, 16)
+      self.Name = Name
 			
 			-- combo points on target
 			local CPoints = {}
@@ -713,9 +720,9 @@ local function Shared(self, unit)
 		if C["unitframes"].combatfeedback == true then
 			local CombatFeedbackText 
 			if T.lowversion then
-				CombatFeedbackText = T.SetFontString(health, font1, 12, "OUTLINE")
+				CombatFeedbackText = T.SetFontString(panel, font1, 12, "OUTLINE")
 			else
-				CombatFeedbackText = T.SetFontString(health, font1, 14, "OUTLINE")
+				CombatFeedbackText = T.SetFontString(panel, font1, 14, "OUTLINE")
 			end
 			CombatFeedbackText:SetPoint("CENTER", 0, 1)
 			CombatFeedbackText.colors = {
@@ -825,7 +832,7 @@ local function Shared(self, unit)
 			Name:SetFont(font1, 12, "OUTLINE")
 		else
 			Name:SetPoint("CENTER", panel, "CENTER", 0, 0)
-			Name:SetFont(font1, 12)
+			Name:SetFont(font1, 14)
 		end
 		Name:SetJustifyH("CENTER")
 
@@ -927,7 +934,7 @@ local function Shared(self, unit)
 			Name:SetFont(font1, 12, "OUTLINE")
 		else
 			Name:SetPoint("CENTER", panel, "CENTER", 0, 0)
-			Name:SetFont(font1, 12)
+			Name:SetFont(font1, 14)
 		end
 		Name:SetJustifyH("CENTER")
 
@@ -965,7 +972,21 @@ local function Shared(self, unit)
 				self.Castbar.Time = castbar.time
 			end
 		end
-		
+		--Pet Buff	
+			local buffs = CreateFrame("Frame", nil, health)
+			buffs:SetHeight(20)
+			buffs:SetWidth(127)
+			buffs.size = 20
+			buffs.spacing = 2
+			buffs.num = 6
+
+			buffs:SetPoint("TOPLEFT", health, "TOPLEFT", -0.5, 24)
+			buffs.initialAnchor = "TOPLEFT"
+			buffs["growth-y"] = "UP"
+			buffs.PostCreateIcon = T.PostCreateAura
+			buffs.PostUpdateIcon = T.PostUpdateAura
+			self.Buffs = buffs
+
 		-- update pet name, this should fix "UNKNOWN" pet names on pet unit, health and bar color sometime being "grayish".
 		self:RegisterEvent("UNIT_PET", T.updateAllElements)
 	end
@@ -1045,14 +1066,14 @@ local function Shared(self, unit)
 		
 		-- names
 		local Name = health:CreateFontString(nil, "OVERLAY")
-		Name:SetPoint("CENTER", health, "CENTER", 0, 0)
+		if T.lowversion then
+			Name:SetPoint("CENTER", self, "CENTER", 0, 0)
+			Name:SetFont(font1, 12, "OUTLINE")
+		else
+			Name:SetPoint("CENTER", panel, "CENTER", 0, 0)
+			Name:SetFont(font1, 14)
+		end
 		Name:SetJustifyH("CENTER")
-		Name:SetFont(font1, 12, "OUTLINE")
-		Name:SetShadowColor(0, 0, 0)
-		Name:SetShadowOffset(1.25, -1.25)
-		
-		self:Tag(Name, '[Tukui:getnamecolor][Tukui:namelong]')
-		self.Name = Name
 
 		-- create debuff for arena units
 		local debuffs = CreateFrame("Frame", nil, self)
@@ -1188,14 +1209,14 @@ local function Shared(self, unit)
 		
 		-- names
 		local Name = health:CreateFontString(nil, "OVERLAY")
-		Name:SetPoint("CENTER", health, "CENTER", 0, 0)
+		if T.lowversion then
+			Name:SetPoint("CENTER", self, "CENTER", 0, 0)
+			Name:SetFont(font1, 12, "OUTLINE")
+		else
+			Name:SetPoint("CENTER", panel, "CENTER", 0, 0)
+			Name:SetFont(font1, 14)
+		end
 		Name:SetJustifyH("CENTER")
-		Name:SetFont(font1, 12, "OUTLINE")
-		Name:SetShadowColor(0, 0, 0)
-		Name:SetShadowOffset(1.25, -1.25)
-		
-		self:Tag(Name, '[Tukui:getnamecolor][Tukui:namelong]')
-		self.Name = Name
 
 		-- create debuff for arena units
 		local debuffs = CreateFrame("Frame", nil, self)
@@ -1507,7 +1528,7 @@ local function Shared(self, unit)
 		local Name = health:CreateFontString(nil, "OVERLAY")
 		Name:SetPoint("CENTER", health, "CENTER", 0, 0)
 		Name:SetJustifyH("CENTER")
-		Name:SetFont(font1, 12, "OUTLINE")
+		Name:SetFont(font1, 14, "OUTLINE")
 		Name:SetShadowColor(0, 0, 0)
 		Name:SetShadowOffset(1.25, -1.25)
 		
@@ -1535,25 +1556,28 @@ oUF:RegisterStyle('Tukui', Shared)
 
 -- player
 local player = oUF:Spawn('player', "TukuiPlayer")
-player:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", 0,8+adjustXY)
+player:SetPoint("CENTER", UIParent, "CENTER", -251, -230)
 if T.lowversion then
 	player:Size(186, 51)
 else
 	player:Size(250, 57)
+  player:SetScale(.7)
 end
 
 -- focus
 local focus = oUF:Spawn('focus', "TukuiFocus")
-focus:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", 0 - adjust, 246)
-focus:Size(200, 29)
+  focus:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 250)
+  focus:SetSize(129,36)
+  focus:SetScale(.7)
 
 -- target
 local target = oUF:Spawn('target', "TukuiTarget")
-target:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", 0,8+adjustXY)
+  target:SetPoint("CENTER", UIParent, "CENTER", 251, -230)
 if T.lowversion then
 	target:Size(186, 51)
 else
 	target:Size(250, 57)
+  target:SetScale(.7)
 end
 
 -- tot
@@ -1562,8 +1586,9 @@ if T.lowversion then
 	tot:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", 0,8)
 	tot:Size(186, 18)
 else
-	tot:SetPoint("BOTTOM", InvTukuiActionBarBackground, "TOP", 0,8)
+	tot:SetPoint("BOTTOM", UIParent, "BOTTOM", 175, 207)
 	tot:Size(129, 36)
+  tot:SetScale(.7)
 end
 
 -- pet
@@ -1572,8 +1597,9 @@ if T.lowversion then
 	pet:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", 0,8)
 	pet:Size(186, 18)
 else
-	pet:SetPoint("BOTTOM", InvTukuiActionBarBackground, "TOP", 0,49+totdebuffs)
+	pet:SetPoint("BOTTOM", UIParent, "BOTTOM", -175, 207)
 	pet:Size(129, 36)
+  pet:SetScale(.7)
 end
 
 if C.unitframes.showfocustarget then

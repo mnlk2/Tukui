@@ -19,8 +19,6 @@ for i=1, 12 do
 	b:SetFrameLevel(15)
 	
 	if i == 1 then
-		b:SetPoint("BOTTOMLEFT", bar, T.buttonspacing, T.buttonspacing)
-	elseif i == 7 then
 		b:SetPoint("TOPLEFT", bar, T.buttonspacing, -T.buttonspacing)
 	else
 		b:SetPoint("LEFT", b2, "RIGHT", T.buttonspacing, 0)
@@ -31,4 +29,11 @@ for i=7, 12 do
 	local b = _G["MultiBarBottomLeftButton"..i]
 	local b2 = _G["MultiBarBottomLeftButton1"]
 	b:SetFrameLevel(b2:GetFrameLevel() - 2)
+end
+
+if not T.lowversion then
+	MultiBarBottomLeftButton11:SetAlpha(0)
+	MultiBarBottomLeftButton11:SetScale(0.0001)
+	MultiBarBottomLeftButton12:SetAlpha(0)
+	MultiBarBottomLeftButton12:SetScale(0.0001)
 end

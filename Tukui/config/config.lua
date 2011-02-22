@@ -1,10 +1,15 @@
 ﻿local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 
 C["general"] = {
-	["autoscale"] = true,                               -- mainly enabled for users that don't want to mess with the config file
-	["uiscale"] = 0.71,                                 -- set your value (between 0.64 and 1) of your uiscale if autoscale is off
+	["autoscale"] = false,                               -- mainly enabled for users that don't want to mess with the config file
+	["uiscale"] = 1,                                 -- set your value (between 0.64 and 1) of your uiscale if autoscale is off
 	["overridelowtohigh"] = false,                      -- EXPERIMENTAL ONLY! override lower version to higher version on a lower reso.
-	["multisampleprotect"] = true,                      -- i don't recommend this because of shitty border but, voila!
+	["multisampleprotect"] = false,                      -- i don't recommend this because of shitty border but, voila!
+}
+
+C["broker_datatext"] = {
+        ["Broker_MicroMenu"] = 4,
+        ["BugSack"] = 0,
 }
 
 C["unitframes"] = {
@@ -42,7 +47,7 @@ C["unitframes"] = {
 	["raidunitdebuffwatch"] = true,                     -- track important spell to watch in pve for grid mode.
 	["gridhealthvertical"] = true,                      -- enable vertical grow on health bar for grid mode.
 	["showplayerinparty"] = false,                      -- show my player frame in party
-	["gridscale"] = 1,                                  -- set the healing grid scaling
+	["gridscale"] = 0.8,                                  -- set the healing grid scaling
 	
 	-- boss frames
 	["showboss"] = true,                                -- enable boss unit frames for PVELOL encounters.
@@ -59,7 +64,7 @@ C["arena"] = {
 }
 
 C["auras"] = {
-	["player"] = true,                                  -- enable tukui buffs/debuffs
+	["player"] = false,                                  -- enable tukui buffs/debuffs
 }
 
 C["actionbar"] = {
@@ -67,9 +72,9 @@ C["actionbar"] = {
 	["hotkey"] = true,                                 -- enable hotkey display because it was a lot requested
 	["hideshapeshift"] = false,                         -- hide shapeshift or totembar because it was a lot requested.
 	["showgrid"] = true,                                -- show grid on empty button
-	["buttonsize"] = 27,                                -- normal buttons size
-	["petbuttonsize"] = 29,                             -- pet & stance buttons size
-	["buttonspacing"] = 4,                              -- buttons spacing
+	["buttonsize"] = 25,                                -- normal buttons size
+	["petbuttonsize"] = 22,                             -- pet & stance buttons size
+	["buttonspacing"] = 2,                              -- buttons spacing
 }
 
 C["bags"] = {
@@ -92,7 +97,8 @@ C["cooldown"] = {
 }
 
 C["datatext"] = {
-	["fps_ms"] = 4,                                     -- show fps and ms on panels
+  ["specswitch"] = 0,
+ 	["fps_ms"] = 4,                                     -- show fps and ms on panels
 	["system"] = 5,                                     -- show total memory and others systems infos on panels
 	["bags"] = 0,                                       -- show space used in bags on panels
 	["gold"] = 6,                                       -- show your current gold on panels
@@ -115,7 +121,7 @@ C["datatext"] = {
 	["battleground"] = true,                            -- enable 3 stats in battleground only that replace stat1,stat2,stat3.
 	["time24"] = true,                                  -- set time to 24h format.
 	["localtime"] = false,                              -- set time to local time instead of server time.
-	["fontsize"] = 12,                                  -- font size for panels.
+	["fontsize"] = 9,                                  -- font size for panels.
 }
 
 C["chat"] = {
@@ -137,7 +143,7 @@ C["nameplate"] = {
 
 C["tooltip"] = {
 	["enable"] = true,                                  -- true to enable this mod, false to disable
-	["hidecombat"] = false,                             -- hide bottom-right tooltip when in combat
+	["hidecombat"] = true,                             -- hide bottom-right tooltip when in combat
 	["hidebuttons"] = false,                            -- always hide action bar buttons tooltip.
 	["hideuf"] = false,                                 -- hide tooltip on unitframes
 	["cursor"] = false,                                 -- tooltip via cursor only
@@ -150,7 +156,7 @@ C["merchant"] = {
 }
 
 C["error"] = {
-	["enable"] = true,                                  -- true to enable this mod, false to disable
+	["enable"] = false,                                  -- true to enable this mod, false to disable
 	filter = {                                          -- what messages to not hide
 		[INVENTORY_FULL] = true,                        -- inventory is full will not be hidden by default
 	},

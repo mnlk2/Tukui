@@ -20,6 +20,6 @@ for i= 1, 12 do
 	if i == 1 then
 		b:SetPoint("TOPLEFT", bar, T.buttonspacing, -T.buttonspacing)
 	else
-		b:SetPoint("LEFT", b2, "RIGHT", T.buttonspacing, 0)
+		b:SetPoint("TOP", b2, "BOTTOM", 0, -T.buttonspacing)
 	end
 end

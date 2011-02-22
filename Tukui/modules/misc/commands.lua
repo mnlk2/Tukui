@@ -45,3 +45,38 @@ SlashCmdList["RAIDDISBAND"] = function()
 		end
 		LeaveParty()
 end
+
+function DisbandRaidGroup()
+		if InCombatLockdown() then return end -- Prevent user error in combat
+
+		SendChatMessage(tukuilocal.disband, "RAID" or "PARTY")
+		if UnitInRaid("player") then
+			for i = 1, GetNumRaidMembers() do
+				local name, _, _, _, _, _, _, online = GetRaidRosterInfo(i)
+				if online and name ~= TukuiDB.myname then
+					UninviteUnit(name)
+				end
+			end
+		else
+			for i = MAX_PARTY_MEMBERS, 1, -1 do
+				if GetPartyMember(i) then
+					UninviteUnit(UnitName("party"..i))
+				end
+			end
+		end
+		LeaveParty()
+end
+
+StaticPopupDialogs["DISBAND_RAID"] = {
+	text = "Are you sure you want to disband the group?",
+	button1 = ACCEPT,
+	button2 = CANCEL,
+	OnAccept = DisbandRaidGroup,
+	timeout = 0,
+	whileDead = 1,
+}
+
+SlashCmdList["GROUPDISBAND"] = function()
+	StaticPopup_Show("DISBAND_RAID")
+end
+SLASH_GROUPDISBAND1 = '/rd'

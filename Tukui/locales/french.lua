@@ -31,7 +31,7 @@ if T.client == "frFR" then
 	L.datatext_download = "Téléchargement : "
 	L.datatext_bandwidth = "Bande passante : "
 	L.datatext_guild = "Guilde"
-	L.datatext_noguild = "Pas de Guilde"
+	L.datatext_noguild = "Sans Guilde"
 	L.datatext_bags = "Sacs : "
 	L.datatext_friends = "Amis"
 	L.datatext_online = "En ligne : "

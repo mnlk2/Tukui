@@ -64,8 +64,8 @@ local function SetChatStyle(frame)
 		_G[chat.."TabText"]:Hide()
 		
 		-- now show text if mouse is found over tab.
-		tab:HookScript("OnEnter", function() _G[chat.."TabText"]:Show() end)
-		tab:HookScript("OnLeave", function() _G[chat.."TabText"]:Hide() end)
+		--tab:HookScript("OnEnter", function() _G[chat.."TabText"]:Show() end)
+		--tab:HookScript("OnLeave", function() _G[chat.."TabText"]:Hide() end)
 	end
 	
 	-- yeah baby
@@ -196,8 +196,8 @@ local function SetupChatPosAndFont(self)
 		local _, fontSize = FCF_GetChatWindowInfo(id)
 		
 		-- well... tukui font under fontsize 12 is unreadable.
-		if fontSize < 12 then		
-			FCF_SetChatWindowFontSize(nil, chat, 12)
+		if fontSize > 9 then		
+			FCF_SetChatWindowFontSize(nil, chat, 9)
 		else
 			FCF_SetChatWindowFontSize(nil, chat, fontSize)
 		end
@@ -206,27 +206,31 @@ local function SetupChatPosAndFont(self)
 		-- also set original width and height of chatframes 1 and 4 if first time we run tukui.
 		-- doing resize of chat also here for users that hit "cancel" when default installation is show.
 		if i == 1 then
-			chat:Point("BOTTOMLEFT", TukuiInfoLeft, "TOPLEFT", 0, 6)
-			chat:Point("BOTTOMRIGHT", TukuiInfoLeft, "TOPRIGHT", 0, 6)
+			chat:Point("BOTTOMLEFT", TukuiInfoLeft, "TOPLEFT", 2, 6)
+			chat:Point("BOTTOMRIGHT", TukuiInfoLeft, "TOPRIGHT", 2, 6)
+			chat:SetWidth(229)
+			chat:SetHeight(106)
 			FCF_SavePositionAndDimensions(chat)
-		elseif i == 4 and name == LOOT then
-			if not chat.isDocked then
+		if i == 2 and name == log then
+			if chat.isDocked then
 				chat:ClearAllPoints()
-				chat:Point("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", 0, 6)
-				chat:Point("BOTTOMLEFT", TukuiInfoRight, "TOPLEFT", 0, 6)
+				chat:SetPoint("BOTTOM", Logbg, "BOTTOM", 0, 0)
+				chat:Width(Logbg:GetWidth() -3)
+				chat:Height(Logbg:GetHeight() -27)
 				chat:SetJustifyH("RIGHT") 
+				chat:Hide()
 				FCF_SavePositionAndDimensions(chat)
 			end
 		end
-		
+end		
 		--Check if chat exists in the bottomright corner
-		if C.chat.background == true and point == "BOTTOMRIGHT" and chat:IsShown() then
-			TukuiChatBackgroundRight:Show()
-			TukuiTabsRightBackground:Show()
-			TukuiLineToABRightAlt:ClearAllPoints()
-			TukuiLineToABRightAlt:Point("LEFT", TukuiBar1, "RIGHT", 0, 16)
-			TukuiLineToABRightAlt:Point("BOTTOMRIGHT", TukuiChatBackgroundRight, "BOTTOMLEFT", 0, 16)			
-		end
+--		if C.chat.background == true and point == "BOTTOMRIGHT" and chat:IsShown() then
+--			TukuiChatBackgroundRight:Show()
+--			TukuiTabsRightBackground:Show()
+--			TukuiLineToABRightAlt:ClearAllPoints()
+--			TukuiLineToABRightAlt:Point("LEFT", TukuiBar1, "RIGHT", 0, 16)
+--			TukuiLineToABRightAlt:Point("BOTTOMRIGHT", TukuiChatBackgroundRight, "BOTTOMLEFT", 0, 16)			
+--		end
 	end
 			
 	-- reposition battle.net popup over chat #1
@@ -261,3 +265,6 @@ local function SetupTempChat()
 	SetChatStyle(frame)
 end
 hooksecurefunc("FCF_OpenTemporaryWindow", SetupTempChat)
+
+
+
