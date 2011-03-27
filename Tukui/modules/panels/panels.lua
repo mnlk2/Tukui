@@ -189,6 +189,7 @@ recountbg:CreatePanel("Transparent", 187, 117, "BOTTOMRIGHT", TukuiInfoRight, "T
 local recounttabbg = CreateFrame("Frame", "RecountTabBG", TukuiInfoLeft)
 recounttabbg:CreatePanel("Transparent", 187, 14, "BOTTOMLEFT", RecountBG, "TOPLEFT", 0, 0)
 recounttabbg:SetParent(RecountBG)
+
 end
 
 local Logbg = CreateFrame("Frame", "Logbg", UIParent)
