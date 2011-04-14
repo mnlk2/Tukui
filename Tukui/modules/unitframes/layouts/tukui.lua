@@ -185,8 +185,10 @@ local function Shared(self, unit)
 				panel:Point("TOPLEFT", power, "BOTTOMLEFT", 0, -1)
 				portrait:SetPoint("TOPRIGHT", health, "TOPRIGHT", 57,0)
 			end
+
 			panel:SetWidth(panel:GetWidth() - 57) -- panel need to be resized if charportrait is enabled
 			table.insert(self.__elements, T.HidePortrait)
+			portrait.PostUpdate = T.PortraitUpdate --Worgen Fix (Hydra)
 			self.Portrait = portrait
 		end
 		

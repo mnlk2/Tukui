@@ -225,7 +225,7 @@ local function SetupChatPosAndFont(self)
 			end
 		end
 	end
- end			
+end			
 	-- reposition battle.net popup over chat #1
 	BNToastFrame:HookScript("OnShow", function(self)
 		self:ClearAllPoints()
