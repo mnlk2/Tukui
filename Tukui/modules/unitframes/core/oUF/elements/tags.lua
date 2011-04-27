@@ -660,7 +660,4 @@ oUF.UnitlessTagEvents = unitlessEvents
 
 oUF:RegisterMetaFunction('Tag', Tag)
 oUF:RegisterMetaFunction('Untag', Untag)
-oUF.Tags['Tukui:getcustomclasscolor'] = function(unit)
-	local c = TukuiDB.oUF_colors.class[TukuiDB.myclass]
-	return string.format('|cff%02x%02x%02x', c[1] * 55, c[2] * 55, c[3] * 55)
-end
+

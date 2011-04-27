@@ -147,13 +147,13 @@ local movechat = 0
 
 -- INFO LEFT (FOR STATS)
 local ileft = CreateFrame("Frame", "TukuiInfoLeft", TukuiBar1)
-TukuiDB.CreatePanel(ileft, TukuiDB.Scale(237), 14, "LEFT", ltoabl, "LEFT", TukuiDB.Scale(14), 0)
+ileft:CreatePanel(ileft, T.Scale(237), 14, "LEFT", ltoabl, "LEFT", T.Scale(14), 0)
 ileft:SetFrameLevel(2)
 ileft:SetFrameStrata("BACKGROUND")
 
 -- INFO RIGHT (FOR STATS)
 local iright = CreateFrame("Frame", "TukuiInfoRight", TukuiBar1)
-TukuiDB.CreatePanel(iright, TukuiDB.Scale(375), 14, "RIGHT", ltoabr, "RIGHT", TukuiDB.Scale(-14), 0)
+iright:CreatePanel(iright, T.Scale(375), 14, "RIGHT", ltoabr, "RIGHT", T.Scale(-14), 0)
 iright:SetFrameLevel(2)
 iright:SetFrameStrata("BACKGROUND")
 

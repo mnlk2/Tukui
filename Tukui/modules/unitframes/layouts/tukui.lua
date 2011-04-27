@@ -234,8 +234,8 @@ local function Shared(self, unit)
 		if (unit == "player") then
       --name
       local Name = health:CreateFontString(nil, "OVERLAY")
-      self:Tag(Name, '[Tukui:getcustomclasscolor][Tukui:namelong] |cffffffff[level]  [shortclassification]')
-      Name:SetPoint("LEFT", health, "LEFT", TukuiDB.Scale(4), TukuiDB.Scale(1))
+      self:Tag(Name, '[Tukui:namelong] |cffffffff[level]  [shortclassification]')
+      Name:SetPoint("LEFT", health, "LEFT", T.Scale(4), T.Scale(1))
       Name:SetJustifyH("LEFT")
       Name:SetFont(font1, 16)
       self.Name = Name		
@@ -569,8 +569,8 @@ local function Shared(self, unit)
 		if (unit == "target") then			
 			-- Unit name on target
       local Name = health:CreateFontString(nil, "OVERLAY")
-      self:Tag(Name, '[Tukui:getcustomclasscolor][Tukui:namelong] |cffffffff[level] [shortclassification]')
-      Name:SetPoint("RIGHT", health, "RIGHT", TukuiDB.Scale(4), TukuiDB.Scale(1))
+      self:Tag(Name, '[Tukui:namelong] |cffffffff[level] [shortclassification]')
+      Name:SetPoint("RIGHT", health, "RIGHT", T.Scale(4), T.Scale(1))
       Name:SetJustifyH("RIGHT")
       Name:SetFont(font1, 16)
       self.Name = Name
