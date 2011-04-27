@@ -184,8 +184,8 @@ vehicleleft:SetTemplate("Default")
 vehicleleft:RegisterForClicks("AnyUp")
 vehicleleft:SetScript("OnClick", function() VehicleExit() end)
 vehicleleft.text = T.SetFontString(vehicleleft, C.media.uffont, 20)
-vehicleleft.text:SetPoint("CENTER", 0, 0)
-vehicleleft.text:SetText("v")
+vehicleleft.text:Point("CENTER", 1, 1)
+vehicleleft.text:SetText("|cff4BAF4CV|r")
 RegisterStateDriver(vehicleleft, "visibility", "[target=vehicle,exists] show;hide")
 
 -- exit vehicle button on right side of bottom action bar
@@ -197,8 +197,8 @@ vehicleright:SetFrameLevel(TukuiBar3RightButton:GetFrameLevel() + 1)
 vehicleright:RegisterForClicks("AnyUp")
 vehicleright:SetScript("OnClick", function() VehicleExit() end)
 vehicleright.text = T.SetFontString(vehicleright, C.media.uffont, 20)
-vehicleright.text:SetPoint("CENTER", 0, 0)
-vehicleright.text:SetText("v")
+vehicleright.text:Point("CENTER", 1, 1)
+vehicleright.text:SetText("|cff4BAF4CV|r")
 RegisterStateDriver(vehicleright, "visibility", "[target=vehicle,exists] show;hide")
 
 --------------------------------------------------------------
